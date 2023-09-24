@@ -1,3 +1,5 @@
+import ij.IJ;
+import ij.ImagePlus;
 import ij.plugin.PlugIn;
 import ij.process.BinaryProcessor;
 import ij.process.ByteProcessor;
@@ -59,5 +61,8 @@ public class UETPVisualizerPlugin implements PlugIn {
         }
 
         /* Step 4: Made a new ImagePlus */
+        ImagePlus image = new ImagePlus("UETP Visualization", binaryIP);
+        image.show();
+        IJ.saveAs("PNG", "../dataset/binary.png");
     }
 }
