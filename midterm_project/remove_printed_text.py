@@ -6,6 +6,9 @@ def extract_handwriting(input_path, output_path):
     # Read the input image
     image = cv2.imread(input_path)
 
+    # Increase contras
+    iamge = cv2.convertScaleAbs(image, 0.05, 0)
+
     # Remove printed fragments
     mask = cv2.inRange(image, (0, 0, 0), (100, 100, 100))
     inv_mask = cv2.bitwise_not(mask)
@@ -21,9 +24,6 @@ def extract_handwriting(input_path, output_path):
     mask_b = np.where(img_ > 180, 255, 0)
     mask_b = cv2.merge((mask_b,)*3)
     final_img = np.where(mask_b == 0, image, 255)
-
-    # Increase contras
-    final_image = cv2.convertScaleAbs(image, 2.5, 0)
 
     # Save the binary image
     cv2.imwrite(output_path, final_img)
