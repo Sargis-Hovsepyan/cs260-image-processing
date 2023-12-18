@@ -16,3 +16,11 @@ Create in the folder /cs_handwriting subfolder for each Cxxx and save in them th
 such Cxxx. Name the files after the code specifying the page number as a suffix after the underscore, like
 CRS.TST.ddmmyy.Cxxx_p1.png or CRS.TST.ddmmyy.Cxxx_p1.jpg. If there are several images of the same page specify 
 the copy in parentheses, like CRS.TST.ddmmyy.Cxxx_p1(2).jpg.
+
+## Stage 1: Eeliminate the printed text
+
+Study the color distribution in each image using RGB and grayscale histograms. Suggest and test a method for 
+automated removal of the printed test. If needed, suggest and test a method for automated removal of instructor’s 
+marks (normally appearing in red shades). Having the handwriting extracted, suggest a test a method to crop it.
+Convert the cropped image to binary format and save it under a filename CRS.TST.ddmmyy.Cxxx_p1_bin.png. 
+Adjust the brightness/contrast before the conversion as needed (for example, auto-contrast, histogram match, etc.).
