@@ -47,7 +47,7 @@ analyses aimed at predicting student progress in computer science and informatio
 
 Here is an example image and example output of the functions mentioned above:
 
-![Sample Handwritting](https://github.com/Sargis-Hovsepyan/cs260-image-processing/blob/master/midterm_project/cs_handwriting_bin/H102/OOP.MT1.170215.H102_p2_bin.jpg)
+![](https://github.com/Sargis-Hovsepyan/cs260-image-processing/blob/master/midterm_project/cs_handwriting_bin/H102/OOP.MT1.170215.H102_p2_bin.jpg)
 
 The featurs of the image:
 
@@ -59,3 +59,16 @@ Avarage Word Spacing:     1352.0
 Avarage Font Size:        1844.0
 Avarage Line Slant:       Leaning Right
 ```
+
+## Stage 3: Evaluate page features
+
+Applied Hough Transform to detect straight lines/segments in the cropped binary handwriting samples. In the realm of handwriting 
+analysis for predicting student performance, the Hough Transform adds a layer of precision to existing evaluations. While previous 
+assessments, such as baseline detection and spacing analysis, offer valuable insights, the Hough Transform systematically detects lines 
+and orientations, providing a more detailed understanding of structural elements. This includes capturing subtle variations in baselines
+and detecting minute slants. Integrating the Hough Transform enriches the analysis, offering a standardized representation of handwriting
+features and enhancing the predictive power of models by discerning intricate patterns and nuances in students' writing.
+
+Here is an example of Hough transfor on the sample image mentione above:
+
+![](https://github.com/Sargis-Hovsepyan/cs260-image-processing/blob/master/midterm_project/cs_handwriting/Hough.png)
