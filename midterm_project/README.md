@@ -26,3 +26,36 @@ Settings of tunning can be adjusted from tune.py
 
 The remove_printed_text is a script that does what is described above. Due to low-quality pictures, it was better to remove
 the printed text with Photoshop. The script is valid and can be applied to scanned images with very high quality.
+
+## Stage 2: Evaluate page features
+
+The process/feature_selection.py contains functions designed to evaluate various aspects of handwritten text, contributing to the 
+task of predicting student performance based on handwriting. 
+
+* The `evaluate_page_properties` function analyzes the size and orientation of the page, providing insights into the structure of the
+handwritten content. This information can be crucial for normalizing features in subsequent analyses. 
+* The `evaluate_font_size` function assesses the average width of characters, offering a measure of the writing style and potentially
+indicating variations in letter formation. 
+* The `evaluate_baseline_orientation` function determines whether the baseline of the handwritten text is ascending, descending, or balanced,
+which could provide valuable information about the writer's emotional state or emphasis.
+* The `evaluate_letter_slant` function evaluates the overall slant of the handwritten text, providing insights into the stylistic aspects of
+the writing. 
+* Lastly, the `evaluate_inter_word_spacing` function calculates the average distance between words, capturing the spatial arrangement of the text.
+
+These functions collectively contribute to the extraction of meaningful features from handwritten samples, forming a foundation for subsequent
+analyses aimed at predicting student progress in computer science and information technology disciplines.
+
+Here is an example image and example output of the functions mentioned above:
+
+[Sample Handwritting](https://github.com/Sargis-Hovsepyan/cs260-image-processing/blob/master/midterm_project/cs_handwriting_bin/H102/OOP.MT1.170215.H102_p2_bin.jpg)
+
+The featur selection of theimage:
+
+```
+Page Size:                2287034.5
+Page Orientation:         90.0
+Baseline Orientation:     Descending
+Avarage Word Spacing:     1352.0
+Avarage Font Size:        1844.0
+Avarage Line Slant:       Leaning Right
+```
