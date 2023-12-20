@@ -6,11 +6,8 @@ def extract_handwriting(input_path, output_path):
     # Read the input image
     image = cv2.imread(input_path)
 
-    # Increase contras
-    iamge = cv2.convertScaleAbs(image, 0.05, 0)
-
     # Remove printed fragments
-    mask = cv2.inRange(image, (0, 0, 0), (100, 100, 100))
+    mask = cv2.inRange(image, (0, 0, 0), (120, 100, 80))
     inv_mask = cv2.bitwise_not(mask)
     kernel = np.ones((5, 5), np.uint8)
     inv_mask = cv2.erode(inv_mask, kernel, iterations=1)
@@ -25,6 +22,8 @@ def extract_handwriting(input_path, output_path):
     mask_b = cv2.merge((mask_b,)*3)
     final_img = np.where(mask_b == 0, image, 255)
 
+    final_img = cv2.GaussianBlur(final_img, (5, 5), 0)
+
     # Save the binary image
     cv2.imwrite(output_path, final_img)
 
@@ -32,7 +31,7 @@ def extract_and_convert(input_folder, output_folder):
     for filename in os.listdir(input_folder):
         if filename.endswith(".jpg"):
             input_path = os.path.join(input_folder, filename)
-            output_path = os.path.join(output_folder, filename.replace(".", "_bin."))
+            output_path = os.path.join(output_folder, filename.replace(".jpg", "_bin.jpg"))
             extract_handwriting(input_path, output_path)
 
 input_folders = ["cs_handwriting/H101", "cs_handwriting/H102"]
