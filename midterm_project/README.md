@@ -9,18 +9,20 @@ welcome to import and use OCR methods after proper acknowledgement and brief des
 
 ## Stage 0: Store the images
 
-Create a new folder /cs_handwriting in the same repository your HW01 is uploaded. Hard copies of handwriting
-samples were given for scan/digitalization with an individual code on each page. The code format is
-CRS.TST.ddmmyy.Cxxx (course name, test, date, lookup index – a letter H, M or L followed by 3 digits).
-Create in the folder /cs_handwriting subfolder for each Cxxx and save in them the images of all pages with
-such Cxxx. Name the files after the code specifying the page number as a suffix after the underscore, like
-CRS.TST.ddmmyy.Cxxx_p1.png or CRS.TST.ddmmyy.Cxxx_p1.jpg. If there are several images of the same page specify 
-the copy in parentheses, like CRS.TST.ddmmyy.Cxxx_p1(2).jpg.
+Created a new folder cs_handwriting. Hard copies of handwriting samples were scanned with a phone and uploaded in 
+cs_handwriting with an individual code on each page. The code format is CRS.TST.ddmmyy.Cxxx (course name, test, date, 
+lookup index – a letter H, M or L followed by 3 digits). Created subfolders for each Cxxx and saved in them the images 
+of all pages with such Cxxx. Named the files after the code specifying the page number as a suffix after the underscore,
+like CRS.TST.ddmmyy.Cxxx_p1.jpg.
 
-## Stage 1: Eeliminate the printed text
+## Stage 1: Eeliminate the printed text and preprocess
 
-Study the color distribution in each image using RGB and grayscale histograms. Suggest and test a method for 
-automated removal of the printed test. If needed, suggest and test a method for automated removal of instructor’s 
-marks (normally appearing in red shades). Having the handwriting extracted, suggest a test a method to crop it.
-Convert the cropped image to binary format and save it under a filename CRS.TST.ddmmyy.Cxxx_p1_bin.png. 
-Adjust the brightness/contrast before the conversion as needed (for example, auto-contrast, histogram match, etc.).
+The cropped versions of each page is uploaded in cs_handwriting_croped folder, in appropriate subfolder. The cropped
+versions contain only the code fragments, the pages that had almost no handwritting on them were ommited. The croping was 
+acheved with photoshop. After cropping the pictures were fine tuned with gaussian blure and increase in contras and brightness,
+additional noise was ommited. The refined versions are binarised and uploaded in cs_handwriting_bin for later processing. The 
+refined versions were created by tune.py script. As long as it is run it updates the cs_handwriting_bin. Settings of tunning
+can be adjusted from tune.py
+
+The remove_printed_text is a script that does what is described above. Due to low quality pictures it was better gtgtto remove
+the printed text with photoshop. The script is valid and can be applied to scanned images with very high quality.
