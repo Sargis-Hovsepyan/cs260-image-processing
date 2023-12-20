@@ -47,9 +47,9 @@ analyses aimed at predicting student progress in computer science and informatio
 
 Here is an example image and example output of the functions mentioned above:
 
-[Sample Handwritting](https://github.com/Sargis-Hovsepyan/cs260-image-processing/blob/master/midterm_project/cs_handwriting_bin/H102/OOP.MT1.170215.H102_p2_bin.jpg)
+![Sample Handwritting](https://github.com/Sargis-Hovsepyan/cs260-image-processing/blob/master/midterm_project/cs_handwriting_bin/H102/OOP.MT1.170215.H102_p2_bin.jpg)
 
-The featur selection of theimage:
+The featurs of the image:
 
 ```
 Page Size:                2287034.5
