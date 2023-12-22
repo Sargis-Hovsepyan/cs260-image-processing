@@ -1,14 +1,15 @@
-import cv2, os, math
+import cv2
+import os, math
 import numpy as np
 
 """
-Description: This function takes an input image, processes it to remove
-printed fragments and instructor marks, applies Gaussian blur, and then
-saves the resulting binary image.
+    Description: This function takes an input image, processes it to remove
+    printed fragments and instructor marks, applies Gaussian blur, and then
+    saves the resulting binary image.
 
-Parameters:
-- input_path: String, the file path of the input image.
-- output_path: String, the file path to save the resulting binary image.
+    Parameters:
+    - input_path: String, the file path of the input image.
+    - output_path: String, the file path to save the resulting binary image.
 """
 
 def extract_handwriting(input_path, output_path):
@@ -37,13 +38,13 @@ def extract_handwriting(input_path, output_path):
     cv2.imwrite(output_path, final_img)
 
 """
-Description: This function processes a folder of input images, applies the 
-extract_handwriting function to each image, and saves the resulting binary
-images in an output folder.
+    Description: This function processes a folder of input images, applies the 
+    extract_handwriting function to each image, and saves the resulting binary
+    images in an output folder.
 
-Parameters:
-- input_folder: String, the path of the folder containing input images.
-- output_folder: String, the path to save the resulting binary images.
+    Parameters:
+    - input_folder: String, the path of the folder containing input images.
+    - output_folder: String, the path to save the resulting binary images.
 """
 
 def extract_handwriting__and_convert(input_folder, output_folder):
@@ -56,13 +57,13 @@ def extract_handwriting__and_convert(input_folder, output_folder):
 ################################# FINE TUNNING ###################################################
             
 """
-Description: This function performs fine-tuning on an input image to enhance its quality.
-It includes operations such as converting to grayscale, applying auto-contrast and Gaussian
-blur, increasing contrast and brightness, converting to a binary image, and sharpening.
+    Description: This function performs fine-tuning on an input image to enhance its quality.
+    It includes operations such as converting to grayscale, applying auto-contrast and Gaussian
+    blur, increasing contrast and brightness, converting to a binary image, and sharpening.
 
-Parameters:
-- input_path: String, the file path of the input image.
-- output_path: String, the file path to save the fine-tuned image.
+    Parameters:
+    - input_path: String, the file path of the input image.
+    - output_path: String, the file path to save the fine-tuned image.
 """
 
 def fine_tune(input_path, output_path):
@@ -94,12 +95,12 @@ def fine_tune(input_path, output_path):
     cv2.imwrite(output_path, sharpened_image)
 
 """
-Description: This function processes a folder of input images, applies the fine_tune
-function to each image, and saves the resulting fine-tuned images in an output folder.
+    Description: This function processes a folder of input images, applies the fine_tune
+    function to each image, and saves the resulting fine-tuned images in an output folder.
 
-Parameters:
-- input_folder: String, the path of the folder containing input images.
-- output_folder: String, the path to save the resulting fine-tuned images.
+    Parameters:
+    - input_folder: String, the path of the folder containing input images.
+    - output_folder: String, the path to save the resulting fine-tuned images.
 """
 
 def tune_and_convert(input_folder, output_folder):
@@ -113,17 +114,17 @@ def tune_and_convert(input_folder, output_folder):
 ################################# FEATURE SELECTION #############################################
 
 """
-Description: This function takes the path of a binary image, reads it, and evaluates
-the size and orientation of the page. It calculates the area and orientation of the
-largest contour in the image, assuming it corresponds to the page.
+    Description: This function takes the path of a binary image, reads it, and evaluates
+    the size and orientation of the page. It calculates the area and orientation of the
+    largest contour in the image, assuming it corresponds to the page.
 
-Parameters:
-- path (String): The path of the binary image.
+    Parameters:
+    - path (String): The path of the binary image.
 
-Returns:
-- size: The area of the largest contour (page size).
-- orientation: The orientation angle of the page.
-- If no contours are found, it returns None.
+    Returns:
+    - size: The area of the largest contour (page size).
+    - orientation: The orientation angle of the page.
+    - If no contours are found, it returns None.
 """
 
 def evaluate_page_properties(path):
@@ -149,18 +150,18 @@ def evaluate_page_properties(path):
         return None
 
 """
-Description: This function takes the path of a binary image, reads it, 
-and evaluates the font size. It finds contours in the image, calculates the
-bounding box for each contour, and extracts the width of each bounding box.
-It filters out small widths as noise and returns the mean width as the font
-size.
+    Description: This function takes the path of a binary image, reads it, 
+    and evaluates the font size. It finds contours in the image, calculates the
+    bounding box for each contour, and extracts the width of each bounding box.
+    It filters out small widths as noise and returns the mean width as the font
+    size.
 
-Parameters:
-- path (String): The path of the binary image.
+    Parameters:
+    - path (String): The path of the binary image.
 
-Returns:
-- font_size: The mean width of the contours.
-- If no contours are found, it returns None.
+    Returns:
+    - font_size: The mean width of the contours.
+    - If no contours are found, it returns None.
 """
 
 def evaluate_font_size(path):
@@ -188,18 +189,18 @@ def evaluate_font_size(path):
     return np.mean(widths)
 
 """
-Description: This function takes the path of a binary image, reads it,
-and evaluates the baseline orientation. It finds contours in the image,
-sorts them by their y-coordinate, and calculates the differences between
-consecutive y-coordinates. It then determines if the baseline is ascending,
-descending, or balanced based on a threshold.
+    Description: This function takes the path of a binary image, reads it,
+    and evaluates the baseline orientation. It finds contours in the image,
+    sorts them by their y-coordinate, and calculates the differences between
+    consecutive y-coordinates. It then determines if the baseline is ascending,
+    descending, or balanced based on a threshold.
 
-Parameters:
-- path (String): The path of the binary image.
+    Parameters:
+    - path (String): The path of the binary image.
 
-Returns:
-- baseline_orientation: "Ascending," "Descending," or "Balanced."
-- If no contours are found, it returns None.
+    Returns:
+    - baseline_orientation: "Ascending," "Descending," or "Balanced."
+    - If no contours are found, it returns None.
 """
 
 def evaluate_baseline_orientation(path):
@@ -241,18 +242,18 @@ def evaluate_baseline_orientation(path):
     return None
 
 """
-Description: This function takes the path of a binary image, reads it,
-and evaluates the letter slant. It finds contours in the image, sorts
-them by their y-coordinate, calculates the angle of each bounding box, 
-and determines if the letters are leaning left, right, or balanced based
-on a threshold.
+    Description: This function takes the path of a binary image, reads it,
+    and evaluates the letter slant. It finds contours in the image, sorts
+    them by their y-coordinate, calculates the angle of each bounding box, 
+    and determines if the letters are leaning left, right, or balanced based
+    on a threshold.
 
-Parameters:
-- path (String): The path of the binary image.
+    Parameters:
+    - path (String): The path of the binary image.
 
-Returns:
-- letter_slant: "Leaning Left," "Leaning Right," or "Balanced."
-- If no contours are found, it returns None.
+    Returns:
+    - letter_slant: "Leaning Left," "Leaning Right," or "Balanced."
+    - If no contours are found, it returns None.
 """
 
 def evaluate_letter_slant(path):
@@ -294,17 +295,17 @@ def evaluate_letter_slant(path):
         return "Balanced"
 
 """
-Description: This function takes the path of a binary image, reads it,
-and evaluates the inter-word spacing. It finds contours in the image,
-sorts them by their x-coordinate, calculates the distances between
-consecutive bounding boxes, and returns the average inter-word spacing.
+    Description: This function takes the path of a binary image, reads it,
+    and evaluates the inter-word spacing. It finds contours in the image,
+    sorts them by their x-coordinate, calculates the distances between
+    consecutive bounding boxes, and returns the average inter-word spacing.
 
-Parameters:
-- path (String): The path of the binary image.
+    Parameters:
+    - path (String): The path of the binary image.
 
-Returns:
-- inter_word_spacing: The average distance between words.
-- If no contours are found, it returns None.
+    Returns:
+    - inter_word_spacing: The average distance between words.
+    - If no contours are found, it returns None.
 """
 
 def evaluate_inter_word_spacing(path):
@@ -339,17 +340,16 @@ def evaluate_inter_word_spacing(path):
 ################################# HOUGH TRANSFORM ###############################################
 
 """
-Description: This function takes the path of a grayscale image, reads it,
-and applies the Hough Transform to detect straight lines or line segments
-in the image. It uses the Canny edge detector to highlight edges and then
-applies Probabilistic Line Transform to identify and draw lines on the image.
+    Description: This function takes the path of a grayscale image, reads it,
+    and applies the Hough Transform to detect straight lines or line segments
+    in the image. It uses the Canny edge detector to highlight edges and then
+    applies Probabilistic Line Transform to identify and draw lines on the image.
 
-Parameters:
-- image_path (String): The path of the grayscale image.
+    Parameters:
+    - image_path (String): The path of the grayscale image.
 
-Returns:
-- The function displays the original image along with the detected lines in red using the Probabilistic Line Transform.
-
+    Returns:
+    - The function displays the original image along with the detected lines in red using the Probabilistic Line Transform.
 """
 
 def hough_transform(image_path):
@@ -399,29 +399,60 @@ def hough_transform(image_path):
     cv2.destroyAllWindows()
 
 
-################################# REGION PROCESSING #############################################
+################################# REGION EXTRACTION #############################################
 
-def extract_regions(path, kernel_size=5, threshold_area=100):
+"""
+    Descriptin: Evaluate regions within a binary image and extract features for each region.
+
+    Parameters:
+    - path (str): The file path of the binary image.
+
+    Returns:
+    - regions (list): A list containing individual regions of interest (ROIs).
+    - region_features (list): A list containing dictionaries with features for each region.
+
+    Each dictionary in region_features contains the following keys:
+    - 'x': x-coordinate of the bounding box.
+    - 'y': y-coordinate of the bounding box.
+    - 'width': Width of the bounding box.
+    - 'height': Height of the bounding box.
+    - 'size': Area of the region.
+    - 'aspect_ratio': Aspect ratio of the region (width/height).
+"""
+
+
+def evaluate_regions(path):
     # Read the binary image
     binary_image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 
-    # Apply morphological operations
-    kernel = np.ones((kernel_size, kernel_size), np.uint8)
-    dilation = cv2.dilate(binary_image, kernel, iterations=2)
-    erosion = cv2.erode(dilation, kernel, iterations=1)
-
     # Find contours in the binary image
-    contours, _ = cv2.findContours(erosion, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    binary_regions = []
+    # Initialize a list to store features for each region
+    regions = []
+    region_features = []
 
-    # Iterate through contours
+    # Loop through each contour
     for contour in contours:
-        # Calculate area and filter small regions
-        area = cv2.contourArea(contour)
-        if area > threshold_area:
-            # Draw rectangle around the region
-            x, y, w, h = cv2.boundingRect(contour)
-            binary_regions.append(binary_image[y:y+h, x:x+w])
+        # Get the bounding box of the contour
+        x, y, w, h = cv2.boundingRect(contour)
 
-    return binary_regions
+        # Extract the region of interest (ROI)
+        region = binary_image[y:y+h, x:x+w]
+        regions.append(region)
+
+        # Calculate features for the region
+        region_size = cv2.contourArea(contour)
+        aspect_ratio = w / h if h != 0 else 0
+
+        # Add features to the list
+        region_features.append({
+            'x': x,
+            'y': y,
+            'width': w,
+            'height': h,
+            'size': region_size,
+            'aspect_ratio': aspect_ratio
+        })
+
+    return regions, region_features
