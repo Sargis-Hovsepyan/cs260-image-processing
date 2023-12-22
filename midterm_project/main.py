@@ -40,3 +40,15 @@ print("Font Size:", font_size)
 
 # Step 7: Even could apply hough_transform to see the lines
 # hough_transform(path)
+
+# Step 8: Evaluations of regions and region info
+regions, region_features = evaluate_regions(path)
+
+for i, feature in enumerate(region_features):
+    print(f"\nRegion {i + 1} Details:")
+    print(f" - Location (x, y): ({feature['x']}, {feature['y']})")
+    print(f" - Size: {feature['size']}")
+    print(f" - Aspect Ratio: {feature['aspect_ratio']}")
+    print(f" - Width: {feature['width']}")
+    print(f" - Height: {feature['height']}")
+    print("\n")
